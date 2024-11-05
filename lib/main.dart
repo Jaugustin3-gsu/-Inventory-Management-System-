@@ -4,13 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'firebase_options.dart';
 
 void main() async {
- WidgetsFlutterBinding.ensureInitialized();
- await Firebase.initializeApp();
- runApp(MyApp());
- }
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _priceController = TextEditingController();
 
   final CollectionReference _products =
-  FirebaseFirestore.instance.collection('products');
+      FirebaseFirestore.instance.collection('products');
 
   Future<void> _createOrUpdate([DocumentSnapshot? documentSnapshot]) async {
     String action = 'create';
@@ -111,7 +110,8 @@ class _HomePageState extends State<HomePage> {
 
   // Deleting a product by id
   Future<void> _deleteProduct(String productId) async {
-   
+    await _products.doc(productId).delete();
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('You have successfully deleted a product'),
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[index];
+                    streamSnapshot.data!.docs[index];
                 return Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(

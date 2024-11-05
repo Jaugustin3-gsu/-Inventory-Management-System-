@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CRUD operations'),
+        title: const Text('Inventory Management System'),
       ),
       // Using StreamBuilder to display all products from Firestore in real-time
       body: StreamBuilder(
